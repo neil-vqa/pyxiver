@@ -11,7 +11,7 @@ Thank you to arXiv for use of its open access interoperability.
 
 ### Example
 
-```buildoutcfg
+```python
 import pyxiver
 import pprint
 
@@ -35,9 +35,9 @@ printer.pprint(minimal_content)
 
 ### Query Params
 
-**query**: Query string to search arXiv
+- **query**: Query string to search arXiv
 
-**search_field**: Search fields listed below
+- **search_field**: Search fields listed below
 
 | Prefix  | Explanation |
 | ------- | ----------- |
@@ -47,11 +47,11 @@ printer.pprint(minimal_content)
 
 *For more fields, please visit https://arxiv.org/help/api/user-manual#query_details*
 
-**max_results**: Count of articles to be returned (default is 10)
+- **max_results**: Count of articles to be returned (default is 10)
 
-**sort_by**: Sort by "relevance", "lastUpdatedDate", "submittedDate" (default is relevance)
+- **sort_by**: Sort by "relevance", "lastUpdatedDate", "submittedDate" (default is relevance)
 
-**sort_order**: Order by "ascending" or "descending" (default is descending)
+- **sort_order**: Order by "ascending" or "descending" (default is descending)
 
 ### Example response from query above
 ```buildoutcfg
