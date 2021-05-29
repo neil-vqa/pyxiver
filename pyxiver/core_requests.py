@@ -20,3 +20,8 @@ def send_to_arxiv(request_url):
                 'status': 'success',
                 'content': response
                 }
+
+
+"""
+TODO: Handling of network errors
+"""
