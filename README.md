@@ -54,7 +54,7 @@ printer.pprint(minimal_content)
 - **sort_order**: Order by "ascending" or "descending" (default is descending)
 
 ### Example response from query above
-```buildoutcfg
+```
 VERBOSE
 
 [{'arxiv:comment': {'#text': 'Submitted to MNRAS. 30 pages, 26 figures. '
@@ -243,6 +243,14 @@ MINIMAL
              'spin interactions of Kerr black holes.',
   'title': 'On-Shell Physics of Black Holes'}]
 
+```
+
+### Tests
+
+```commandline
+coverage run --source=pyxiver -m pytest
+
+coverage report
 ```
 
 ### License
