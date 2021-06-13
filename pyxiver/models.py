@@ -11,7 +11,7 @@ import json
 
 class RequestPapers(object):
     """
-    build the search query
+    build the search query for multiple papers
     """
 
     BASE_URL = 'http://export.arxiv.org/api/query?'
@@ -29,6 +29,22 @@ class RequestPapers(object):
     def construct_url(self):
         sorting = f'sortBy={self.sort_by}&sortOrder={self.sort_order}'
         query_params = f'search_query={self.search_field}:{self.query}&max_results={self.max_results}&{sorting}'
+        request_url = f'{self.BASE_URL}{query_params}'
+        return request_url
+
+
+class RequestOnePaper(object):
+    """
+    build query for a single paper
+    """
+
+    BASE_URL = 'http://export.arxiv.org/api/query?'
+
+    def __init__(self, arxiv_id):
+        self.arxiv_id = arxiv_id
+
+    def construct_url_for_id(self):
+        query_params = f'id_list={self.arxiv_id}'
         request_url = f'{self.BASE_URL}{query_params}'
         return request_url
 
@@ -60,6 +76,37 @@ class Papers(object):
         articles_feed = json.loads(json.dumps(xmltodict.parse(xml_response)))
         articles = articles_feed['feed']['entry']
         return articles
+
+
+class OnePaper(object):
+    """
+    parse response and provide interface for client
+    """
+
+    def __init__(self, response):
+        self.response = response['content']
+
+    @property
+    def verbose(self):
+        article = self.__content_parser()
+        return article
+
+    @property
+    def minimal(self):
+        full_article = self.__content_parser()
+        minimal = {
+            'title': full_article['title'],
+            'author': full_article['author'],
+            'published': full_article['published'],
+            'summary': full_article['summary']
+        }
+        return minimal
+
+    def __content_parser(self):
+        xml_response = self.response.text
+        article_dict = json.loads(json.dumps(xmltodict.parse(xml_response)))
+        article = article_dict['feed']['entry']
+        return article
 
 
 class ApiError(object):
