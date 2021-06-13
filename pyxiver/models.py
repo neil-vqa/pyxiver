@@ -67,5 +67,12 @@ class ApiError(object):
         self.error = response
 
     @property
-    def content(self):
+    def verbose(self):
         return self.error
+
+    @property
+    def minimal(self):
+        return {
+            'status': 'fail',
+            'status_code': self.error['status_code'],
+        }
