@@ -24,16 +24,30 @@ query = pyxiver.get_all('black hole',
                         sort_by='submittedDate',
                         sort_order='descending')
 
-# Verbose content
+# Verbose content - multiple papers
 verbose_content = query.verbose
 printer.pprint(verbose_content)
 
 # Minimal content - provides only the title, summary, id, and category
 minimal_content = query.minimal
 printer.pprint(minimal_content)
+
+
+# Provide the abstract URL found as the "id" key from the list of articles fetched through get_all()
+query_one = pyxiver.get_one('http://arxiv.org/abs/2106.05901v1')
+
+# Verbose content - single paper
+verbose_content = query_one.verbose
+printer.pprint(verbose_content)
+
+# Minimal content - provides only the title, authors, published date, and summary
+minimal_content = query_one.minimal
+printer.pprint(minimal_content)
 ```
 
-### Query Params
+## Query Params
+
+### Get multiple papers
 
 - **query**: Query string to search arXiv
 
@@ -53,7 +67,7 @@ printer.pprint(minimal_content)
 
 - **sort_order**: Order by "ascending" or "descending" (default is descending)
 
-### Example response from query above
+### Example response for multiple papers
 ```
 VERBOSE
 
@@ -245,7 +259,131 @@ MINIMAL
 
 ```
 
-### Tests
+### Get a single paper
+
+- **arxiv_url**: this is the abstract URL of the paper. This can be found as the 'id' key of a paper from the list of 
+papers fetched using the pyxiver.get_all() method.
+  
+### Example response for a single paper
+```
+VERBOSE
+
+{'arxiv:comment': {'#text': '15 pages, 4 figures, one appendix. Comments are '
+                            'welcome',
+                   '@xmlns:arxiv': 'http://arxiv.org/schemas/atom'},
+ 'arxiv:primary_category': {'@scheme': 'http://arxiv.org/schemas/atom',
+                            '@term': 'hep-ph',
+                            '@xmlns:arxiv': 'http://arxiv.org/schemas/atom'},
+ 'author': [{'name': 'Guan-Wen Yuan'},
+            {'name': 'Zhan-Fang Chen'},
+            {'name': 'Zhao-Qiang Shen'},
+            {'name': 'Wen-Qing Guo'},
+            {'name': 'Ran Ding'},
+            {'name': 'Xiaoyuan Huang'},
+            {'name': 'Qiang Yuan'}],
+ 'category': [{'@scheme': 'http://arxiv.org/schemas/atom', '@term': 'hep-ph'},
+              {'@scheme': 'http://arxiv.org/schemas/atom',
+               '@term': 'astro-ph.HE'}],
+ 'id': 'http://arxiv.org/abs/2106.05901v1',
+ 'link': [{'@href': 'http://arxiv.org/abs/2106.05901v1',
+           '@rel': 'alternate',
+           '@type': 'text/html'},
+          {'@href': 'http://arxiv.org/pdf/2106.05901v1',
+           '@rel': 'related',
+           '@title': 'pdf',
+           '@type': 'application/pdf'}],
+ 'published': '2021-06-10T16:29:25Z',
+ 'summary': 'The fast developments of radio astronomy open a new window to '
+            'explore the\n'
+            'properties of Dark Matter (DM). The recent direct imaging of the '
+            'supermassive\n'
+            'black hole (SMBH) at the center of M87 radio galaxy by the Event '
+            'Horizon\n'
+            'Telescope (EHT) collaboration is expected to be very useful to '
+            'search for\n'
+            'possible new physics. In this work, we illustrate that such '
+            'results can be used\n'
+            'to detect the possible synchrotron radiation signature produced '
+            'by DM\n'
+            'annihilation from the innermost region of the SMBH. Assuming the '
+            'existence of a\n'
+            'spiky DM density profile, we obtain the flux density due to DM '
+            'annihilation\n'
+            'induced electrons and positrons, and derive new limits on the DM '
+            'annihilation\n'
+            'cross section via the comparison with the EHT integral flux '
+            'density at 230 GHz.\n'
+            'Our results show that the parameter space can be probed by the '
+            'EHT observations\n'
+            'is largely complementary to other experiments. For DM with '
+            'typical mass regions\n'
+            'of being weakly interacting massive particles, the annihilation '
+            'cross section\n'
+            'several orders of magnitude below the thermal production level '
+            'can be excluded\n'
+            'by the EHT observations under the density spike assumption. '
+            'Future EHT\n'
+            'observations may further improve the sensitivity on the DM '
+            'searches, and may\n'
+            'also provide a unique opportunity to test the interplay between '
+            'DM and the\n'
+            'SMBH.',
+ 'title': 'Strong Limits on Dark Matter Annihilation from the Event Horizon\n'
+          '  Telescope Observations of M87$^\\star$',
+ 'updated': '2021-06-10T16:29:25Z'}
+ 
+ ***************************************************************************************************
+ 
+ MINIMAL
+ 
+ {'author': [{'name': 'Guan-Wen Yuan'},
+            {'name': 'Zhan-Fang Chen'},
+            {'name': 'Zhao-Qiang Shen'},
+            {'name': 'Wen-Qing Guo'},
+            {'name': 'Ran Ding'},
+            {'name': 'Xiaoyuan Huang'},
+            {'name': 'Qiang Yuan'}],
+ 'published': '2021-06-10T16:29:25Z',
+ 'summary': 'The fast developments of radio astronomy open a new window to '
+            'explore the\n'
+            'properties of Dark Matter (DM). The recent direct imaging of the '
+            'supermassive\n'
+            'black hole (SMBH) at the center of M87 radio galaxy by the Event '
+            'Horizon\n'
+            'Telescope (EHT) collaboration is expected to be very useful to '
+            'search for\n'
+            'possible new physics. In this work, we illustrate that such '
+            'results can be used\n'
+            'to detect the possible synchrotron radiation signature produced '
+            'by DM\n'
+            'annihilation from the innermost region of the SMBH. Assuming the '
+            'existence of a\n'
+            'spiky DM density profile, we obtain the flux density due to DM '
+            'annihilation\n'
+            'induced electrons and positrons, and derive new limits on the DM '
+            'annihilation\n'
+            'cross section via the comparison with the EHT integral flux '
+            'density at 230 GHz.\n'
+            'Our results show that the parameter space can be probed by the '
+            'EHT observations\n'
+            'is largely complementary to other experiments. For DM with '
+            'typical mass regions\n'
+            'of being weakly interacting massive particles, the annihilation '
+            'cross section\n'
+            'several orders of magnitude below the thermal production level '
+            'can be excluded\n'
+            'by the EHT observations under the density spike assumption. '
+            'Future EHT\n'
+            'observations may further improve the sensitivity on the DM '
+            'searches, and may\n'
+            'also provide a unique opportunity to test the interplay between '
+            'DM and the\n'
+            'SMBH.',
+ 'title': 'Strong Limits on Dark Matter Annihilation from the Event Horizon\n'
+          '  Telescope Observations of M87$^\\star$'}
+```
+
+## Tests
 
 ```commandline
 coverage run --source=pyxiver -m pytest
@@ -253,7 +391,7 @@ coverage run --source=pyxiver -m pytest
 coverage report
 ```
 
-### License
+## License
 
 MIT License
 
