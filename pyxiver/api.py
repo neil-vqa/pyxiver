@@ -50,5 +50,5 @@ def get_one(paper_url):
 
 def arxiv_id_parser(paper_url):
     id_split = paper_url.split("/")
-    id = id_split[4]
+    id = id_split[-1]
     return id
