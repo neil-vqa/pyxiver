@@ -1,13 +1,16 @@
 # pyXiver
 
 
-### WIP
-
 **pyXiver** (pyCHIver) is a wrapper for the arXiv public API.
 
 Thank you to arXiv for use of its open access interoperability.
 
 *This project is NOT connected to arXiv (arxiv.org) and Cornell University.*
+
+### Install
+```python
+pip install pyxiver
+```
 
 ### Example
 
