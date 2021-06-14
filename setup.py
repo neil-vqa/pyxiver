@@ -9,7 +9,7 @@ README = (HERE / "README.md").read_text()
 
 # Details
 NAME = "pyxiver"
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 DESCRIPTION = "Python wrapper for the arXiv.org public API."
 URL = "https://github.com/neil-vqa/pyxiver"
 AUTHOR = "Neil Van Alino"
