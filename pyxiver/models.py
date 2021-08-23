@@ -26,7 +26,7 @@ class RequestPapers(object):
     def __repr__(self):
         return f'{self.query}'
 
-    def construct_url(self):
+    def construct_url(self) -> str:
         sorting = f'sortBy={self.sort_by}&sortOrder={self.sort_order}'
         query_params = f'search_query={self.search_field}:{self.query}&max_results={self.max_results}&{sorting}'
         request_url = f'{self.BASE_URL}{query_params}'
@@ -43,7 +43,7 @@ class RequestOnePaper(object):
     def __init__(self, arxiv_id: str):
         self.arxiv_id = arxiv_id
 
-    def construct_url_for_id(self):
+    def construct_url_for_id(self) -> str:
         query_params = f'id_list={self.arxiv_id}'
         request_url = f'{self.BASE_URL}{query_params}'
         return request_url
@@ -59,19 +59,19 @@ class Papers(object):
 
     @property
     def verbose(self):
-        articles_list = self.__list_parser()
+        articles_list = self._list_parser()
         return articles_list
 
     @property
     def minimal(self):
-        articles_list = self.__list_parser()
+        articles_list = self._list_parser()
         minimal_list = [{'title': article['title'],
                          'summary': article['summary'],
                          'id': article['id'],
                          'category': article['arxiv:primary_category']['@term']} for article in articles_list]
         return minimal_list
 
-    def __list_parser(self):
+    def _list_parser(self):
         xml_response = self.response.text
         articles_feed = json.loads(json.dumps(xmltodict.parse(xml_response)))
         articles = articles_feed['feed']['entry']
@@ -88,12 +88,12 @@ class OnePaper(object):
 
     @property
     def verbose(self):
-        article = self.__content_parser()
+        article = self._content_parser()
         return article
 
     @property
     def minimal(self):
-        full_article = self.__content_parser()
+        full_article = self._content_parser()
         minimal = {
             'title': full_article['title'],
             'author': full_article['author'],
@@ -102,7 +102,7 @@ class OnePaper(object):
         }
         return minimal
 
-    def __content_parser(self):
+    def _content_parser(self):
         xml_response = self.response.text
         article_dict = json.loads(json.dumps(xmltodict.parse(xml_response)))
         article = article_dict['feed']['entry']
