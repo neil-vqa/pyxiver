@@ -4,9 +4,10 @@ This module contains the requests to arxiv and handle responses
 
 
 import requests
+from typing import Dict, Union
+from requests.models import Response
 
-
-def send_to_arxiv(request_url):
+def send_to_arxiv(request_url: str) -> Dict[str, Union[str, int, Response]]:
     response = requests.get(request_url)
     if response.status_code != 200:
         return {
