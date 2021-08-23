@@ -16,7 +16,7 @@ class RequestPapers(object):
 
     BASE_URL = 'http://export.arxiv.org/api/query?'
 
-    def __init__(self, query, search_field, max_results, sort_by, sort_order):
+    def __init__(self, query: str, search_field: str, max_results: int, sort_by: str, sort_order: str):
         self.query = query
         self.max_results = max_results
         self.search_field = search_field
@@ -40,7 +40,7 @@ class RequestOnePaper(object):
 
     BASE_URL = 'http://export.arxiv.org/api/query?'
 
-    def __init__(self, arxiv_id):
+    def __init__(self, arxiv_id: str):
         self.arxiv_id = arxiv_id
 
     def construct_url_for_id(self):
