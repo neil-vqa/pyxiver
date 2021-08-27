@@ -2,7 +2,7 @@
 This module contains tests for the pyxiver core_requests
 """
 
-from pyxiver import send_to_arxiv, get_all, Papers
+from pyxiver import send_to_arxiv, get_all, Papers, get_one, OnePaper
 
 
 class TestRequest:
@@ -22,3 +22,7 @@ class TestAPI:
     def test_success_get_all(self):
         result = get_all('black hole', search_field="ti", max_results=2)
         assert isinstance(result, Papers)
+
+    def test_success_get_one(self):
+        result = get_one('http://arxiv.org/abs/2106.05901v1')
+        assert isinstance(result, OnePaper)
