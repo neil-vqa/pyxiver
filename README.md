@@ -386,13 +386,20 @@ VERBOSE
           '  Telescope Observations of M87$^\\star$'}
 ```
 
-## Tests
+## Development
+
+The project uses poetry to package and manage dependencies:
 
 ```commandline
-coverage run --source=pyxiver -m pytest
-
-coverage report
+poetry install
 ```
+
+Run tests:
+
+```commandline
+poetry run pytest
+```
+
 
 ## License
 
