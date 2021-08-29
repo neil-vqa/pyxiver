@@ -9,17 +9,17 @@ from typing import Union
 
 
 def get_all(
-    query: str, 
-    search_field: str ="all", 
-    max_results: int = 10, 
-    sort_by: str ='relevance', 
-    sort_order: str ='descending'
-    ) -> Union[Papers, ApiError]:
+    query: str,
+    search_field: str = "all",
+    max_results: int = 10,
+    sort_by: str = "relevance",
+    sort_order: str = "descending",
+) -> Union[Papers, ApiError]:
 
     request = RequestPapers(query, search_field, max_results, sort_by, sort_order)
     request_url = request.construct_url()
     response = send_to_arxiv(request_url)
-    if response['status'] == 'fail':
+    if response["status"] == "fail":
         fail_result = ApiError(response)
         return fail_result
     else:
@@ -32,7 +32,7 @@ def get_one(paper_url: str) -> Union[OnePaper, ApiError]:
     request = RequestOnePaper(arxiv_id)
     request_url = request.construct_url_for_id()
     response = send_to_arxiv(request_url)
-    if response['status'] == 'fail':
+    if response["status"] == "fail":
         fail_result = ApiError(response)
         return fail_result
     else:
