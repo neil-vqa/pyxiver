@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyxiver"
-version = "1.0.2"
+version = "1.0.3"
 description = "Python wrapper for the arXiv.org public API."
 authors = ["Neil Van <nvq.alino@gmail.com>"]
 license = "MIT"
